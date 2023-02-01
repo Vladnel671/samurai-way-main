@@ -3,9 +3,12 @@ import React from "react";
 const Technologies = () => {
     return (
         <div>
-            <a href="">Home</a>
-            <a href="">News Feed</a>
-            <a href="">Messages</a>
+            <ul>
+                <li>css</li>
+                <li>html</li>
+                <li>js</li>
+                <li>react</li>
+            </ul>
         </div>
     )
 }
