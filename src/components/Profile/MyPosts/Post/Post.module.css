@@ -6,3 +6,8 @@
     height: 80px;
     border-radius: 50px ;
 }
+.likesCount {
+    color: yellow;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-weight: bold;
+}

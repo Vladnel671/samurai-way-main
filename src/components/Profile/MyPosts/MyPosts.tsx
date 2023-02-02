@@ -13,8 +13,8 @@ const MyPosts = () => {
                 <button>Remove</button>
             </div>
             <div className={s.posts}>
-                <Post message='Hi, how are you?'/>
-                <Post message="It's my first post"/>
+                <Post likesCount={20} message='Hi, how are you?'/>
+                <Post likesCount={31} message="It's my first post"/>
             </div>
         </div>
 
