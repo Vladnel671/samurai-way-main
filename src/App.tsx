@@ -16,7 +16,6 @@ type AppPropsType = {
 
 const App: React.FC<AppPropsType> = (props): JSX.Element => {
     return (
-        <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
                 <Navbar/>
@@ -30,7 +29,6 @@ const App: React.FC<AppPropsType> = (props): JSX.Element => {
 
                 </div>
             </div>
-        </BrowserRouter>
     )
 }
 
