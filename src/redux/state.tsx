@@ -16,10 +16,10 @@ let dialogs: DialogsType[]
 let messages: MessagesType[]
 let posts: PostsTypeProps[]
 
-type ProfilePageType = {
+export type ProfilePageType = {
     posts: Array<PostsTypeProps>
 }
-type DialogPageType = {
+export type DialogPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
 }
