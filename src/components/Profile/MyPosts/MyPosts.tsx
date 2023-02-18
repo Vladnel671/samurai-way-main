@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {PostsTypeProps} from "../../../index";
+import {PostsTypeProps} from "../../../redux/state";
 
 type Posts = {
     posts: PostsTypeProps[]
