@@ -1,35 +1,21 @@
 import React from 'react';
 import s from "./Dialogs.module.css"
 import {NavLink} from "react-router-dom";
+import DialogsItem from "./DialogItem/DialogsItem";
+import Message from "./Message/Message";
 
-type DialogsItemsPropsType = {
+type DialogsType = {
+    id:number,
     name: string
-    id: number
 }
-type MessagePropsType = {
+type MessagesType = {
+    id:number,
     message: string
 }
 
-const DialogsItem: React.FC<DialogsItemsPropsType> = (props) => {
-    let path = "/dialogs/" + props.id
-    return (
-        <div>
-            <NavLink to={path}>{props.name}</NavLink>
-        </div>
-    )
-}
+const Dialogs: React.FC = () : JSX.Element=> {
 
-const Message: React.FC<MessagePropsType> = (props) => {
-    return (
-        <div>
-            <div className={s.message}>{props.message}</div>
-        </div>
-    )
-}
-
-const Dialogs = () => {
-
-    let dialogs= [
+    let dialogs : Array<DialogsType>= [
         {id: 1, name: 'Dimych'},
         {id: 2, name: 'Vlad'},
         {id: 3, name: 'Sveta'},
@@ -37,7 +23,7 @@ const Dialogs = () => {
         {id: 5, name: 'Andrey'},
         {id: 6, name: 'Anton'}
     ]
-    let messages = [
+    let messages : Array<MessagesType> = [
         {id: 1, message: 'Hi'},
         {id: 2, message: 'How are you?'},
         {id: 3, message: 'Yo'},

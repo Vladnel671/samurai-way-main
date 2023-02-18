@@ -3,9 +3,15 @@ import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 
 
-const MyPosts = () => {
+type PostsTypeProps = {
+    id: number,
+    message: string,
+    likesCount: number
+}
+const MyPosts:React.FC= (): JSX.Element => {
 
-    let posts = [
+
+    let posts : Array<PostsTypeProps> = [
         {id: 1, message: 'Hi, how are you?', likesCount: 22},
         {id: 2, message: "It's my first post", likesCount: 31}
     ]
