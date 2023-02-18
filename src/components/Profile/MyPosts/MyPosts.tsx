@@ -1,22 +1,15 @@
-import React from "react";
+import React, {FC} from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
+import {PostsTypeProps} from "../../../../src/index";
 
-
-type PostsTypeProps = {
-    id: number,
-    message: string,
-    likesCount: number
+type Posts = {
+    posts: PostsTypeProps[]
 }
-const MyPosts:React.FC= (): JSX.Element => {
 
+const MyPosts: React.FC<Posts>= (props): JSX.Element => {
 
-    let posts : Array<PostsTypeProps> = [
-        {id: 1, message: 'Hi, how are you?', likesCount: 22},
-        {id: 2, message: "It's my first post", likesCount: 31}
-    ]
-
-    let postsElements = posts.map( p => <Post likesCount={p.likesCount} message={p.message}/>)
+    let postsElements = props.posts.map( p => <Post likesCount={p.likesCount} message={p.message}/>)
 
     return (
         <div className={s.postsBlock}>

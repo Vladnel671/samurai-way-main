@@ -2,12 +2,18 @@ import React from "react";
 import s from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {PostsTypeProps} from "../../../src/index";
 
-const Profile: React.FC = (): JSX.Element => {
+type Posts = {
+    posts: PostsTypeProps[]
+}
+
+const Profile: React.FC<Posts> = (props): JSX.Element => {
+
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts/>
+            <MyPosts posts={props.posts}/>
         </div>
 
     )
