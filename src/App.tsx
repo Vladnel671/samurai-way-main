@@ -8,10 +8,13 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News"
 import Music from "./components/Music/Music"
 import Settings from "./components/Settings/Settings"
-import state, {RootStateType} from "./redux/state"
+import state, {addPost, changePostTextCallback, ProfilePageType, RootStateType} from "./redux/state"
 
 type AppPropsType = {
     state: RootStateType
+    addPost :  (postMessage : string) => void
+    messageForNewPost: string
+    changePostTextCallback: (newText: string) => void
 }
 
 const App: React.FC<AppPropsType> = (props): JSX.Element => {
@@ -22,7 +25,7 @@ const App: React.FC<AppPropsType> = (props): JSX.Element => {
                 <div className='app-wrapper-content'>
 
                     <Route path="/dialogs" render={() => <Dialogs state={props.state.dialogsPage}/>}/>
-                    <Route path="/profile" render={() => <Profile state={props.state.profilePage}/>}/>
+                    <Route path="/profile" render={() => <Profile changePostTextCallback={props.changePostTextCallback} messageForNewPost={props.messageForNewPost} addPost={props.addPost} state={props.state.profilePage}/>}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>

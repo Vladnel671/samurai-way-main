@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from "../render";
+
 export type DialogsType = {
     id: number,
     name: string
@@ -17,6 +19,7 @@ let messages: MessagesType[]
 let posts: PostsTypeProps[]
 
 export type ProfilePageType = {
+    messageForNewPost: string
     posts: Array<PostsTypeProps>
 }
 export type DialogPageType = {
@@ -31,8 +34,9 @@ export type RootStateType = {
     sidebar: SidebarType
 }
 
-let state : RootStateType = {
+let state: RootStateType = {
     profilePage: {
+        messageForNewPost: "",
         posts: [
             {id: 1, message: "Hi, how are you?", likesCount: 12},
             {id: 2, message: "It's my first post", likesCount: 54}
@@ -58,5 +62,18 @@ let state : RootStateType = {
     sidebar: {}
 }
 
+export const addPost = (postMessage: string) => {
+    let newPost: PostsTypeProps = {
+        id: new Date().getTime(),
+        message: postMessage,
+        likesCount: 14
+    }
+    state.profilePage.posts.push(newPost)
+    rerenderEntireTree(state)
+}
+export const changePostTextCallback = (newText: string) => {
+    state.profilePage.messageForNewPost = newText
+    rerenderEntireTree(state)
+}
 
 export default state;
