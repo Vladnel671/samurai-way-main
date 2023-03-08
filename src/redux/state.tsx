@@ -1,4 +1,10 @@
-import {rerenderEntireTree} from "../render";
+let OnChange = () => {
+    console.log("Hello")
+}
+
+export const subscribe = (callback: () => void) => {
+    OnChange = callback
+}
 
 export type DialogsType = {
     id: number,
@@ -69,11 +75,11 @@ export const addPost = (postMessage: string) => {
         likesCount: 14
     }
     state.profilePage.posts.push(newPost)
-    rerenderEntireTree(state)
+    OnChange()
 }
 export const changePostTextCallback = (newText: string) => {
     state.profilePage.messageForNewPost = newText
-    rerenderEntireTree(state)
+    OnChange()
 }
 
 export default state;
