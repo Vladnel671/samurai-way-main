@@ -1,11 +1,3 @@
-let OnChange = () => {
-    console.log("Hello")
-}
-
-export const subscribe = (callback: () => void) => {
-    OnChange = callback
-}
-
 export type DialogsType = {
     id: number,
     name: string
@@ -33,14 +25,22 @@ export type DialogPageType = {
     messages: Array<MessagesType>
 }
 type SidebarType = {}
-
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
     sidebar: SidebarType
 }
+export type StoreType = {
+    _state: RootStateType
+    changePostTextCallback: (newText: string) => void
+    addPost: (postMessage: string) => void
+    _onChange: () => void
+    subscribe: (callback: () => void ) => void
+    getState: () => RootStateType
+}
 
-let state: RootStateType = {
+const store : StoreType = {
+    _state: {
     profilePage: {
         messageForNewPost: "",
         posts: [
@@ -66,20 +66,30 @@ let state: RootStateType = {
         ]
     },
     sidebar: {}
-}
+},
+    changePostTextCallback (newText: string) {
+        this._state.profilePage.messageForNewPost = newText
+        this._onChange()
+    },
+    addPost (postMessage: string) {
+        let newPost: PostsTypeProps = {
+            id: new Date().getTime(),
+            message: postMessage,
+            likesCount: 14
+        }
+        this._state.profilePage.posts.push(newPost)
+        this._onChange()
+    },
+    _onChange() {
+        console.log("state changed")
+    },
 
-export const addPost = (postMessage: string) => {
-    let newPost: PostsTypeProps = {
-        id: new Date().getTime(),
-        message: postMessage,
-        likesCount: 14
+    subscribe (callback){
+        this._onChange = callback
+    },
+    getState() {
+        return this._state
     }
-    state.profilePage.posts.push(newPost)
-    OnChange()
-}
-export const changePostTextCallback = (newText: string) => {
-    state.profilePage.messageForNewPost = newText
-    OnChange()
 }
 
-export default state;
+export default store;

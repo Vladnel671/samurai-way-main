@@ -12,11 +12,13 @@ type Posts = {
 
 const MyPosts: React.FC<Posts> = (props): JSX.Element => {
 
-    let postsElements = props.posts.map(p => <Post likesCount={p.likesCount} message={p.message}/>)
+    let postsElements = props.posts.map(p => <Post key={p.id} likesCount={p.likesCount} message={p.message}/>)
 
-    let addPost = () => {props.addPost(props.messageForNewPost)}
+    let addPost = () => {
+        props.addPost(props.messageForNewPost)
+    }
 
-    const newTextChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>)=>props.changePostTextCallback(e.currentTarget.value)
+    const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => props.changePostTextCallback(e.currentTarget.value)
 
 
     return (
