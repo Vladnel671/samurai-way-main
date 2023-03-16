@@ -9,7 +9,7 @@ import store from "./redux/state";
 const rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
-            <App store={store} changePostTextCallback={store.changePostTextCallback.bind(store)} messageForNewPost={store._state.profilePage.messageForNewPost} state={store.getState()} addPost={store.addPost.bind(store)}/>
+            <App store={store} dispatch={store.dispatch.bind(store)} />
         </BrowserRouter>, document.getElementById('root')
     );
 };
