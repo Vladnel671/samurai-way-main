@@ -16,17 +16,17 @@ type AppPropsType = {
 }
 
 const App: React.FC<AppPropsType> = (props): JSX.Element => {
-    const state = props.store.getState()
+    //const state = props.store.getState()
     return (
         <div className='app-wrapper'>
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-                <Route path="/dialogs" render={() => <Dialogs store={props.store} state={props.store._state.dialogsPage}/>}/>
+                <Route path="/dialogs" render={() => <Dialogs store={props.store} dispatch={props.dispatch}/>}/>
                 <Route path="/profile" render={() => <Profile
                     changePostTextCallback={props.store.changePostTextCallback.bind(props.store)}
-                    messageForNewPost={state.profilePage.messageForNewPost} dispatch={props.dispatch}
-                    state={state.profilePage}/>}/>
+                    messageForNewPost={props.store._state.profilePage.messageForNewPost} dispatch={props.dispatch}
+                    state={props.store._state.profilePage}/>}/>
                 <Route path="/news" render={() => <News/>}/>
                 <Route path="/music" render={() => <Music/>}/>
                 <Route path="/settings" render={() => <Settings/>}/>

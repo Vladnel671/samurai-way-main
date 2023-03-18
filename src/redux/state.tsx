@@ -12,6 +12,11 @@ export type PostsTypeProps = {
     likesCount: number
 }
 
+export type newMessageBody = {
+    id: number,
+    message: string
+}
+
 let dialogs: DialogsType[]
 let messages: MessagesType[]
 let posts: PostsTypeProps[]
@@ -23,6 +28,7 @@ export type ProfilePageType = {
 export type DialogPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
+    newMessageBody: string
 }
 type SidebarType = {}
 export type RootStateType = {
@@ -38,19 +44,37 @@ export type StoreType = {
     subscribe: (callback: () => void) => void
     getState: () => RootStateType
     dispatch: (action: ActionsTypes) => void
+    updateNewMessageBody:(body: string) => void
+    sendNewMessageBody: (body: string) => void
 }
 
-type AddPostActionType = {
-    type: "ADD-POST"
-    postMessage: string
-}
-type ChangeNewTextActionType = {
-    type: "CHANGE-NEW-TEXT"
-    newText: string
-}
-export type ActionsTypes = AddPostActionType | ChangeNewTextActionType
+export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewTextAC> | ReturnType<typeof updateNewMessageBodyAC> | ReturnType<typeof sendNewMessageBodyAC>
 
+export const addPostAC = (postMessage: string) => {
+    return {
+        type: "ADD-POST",
+        postMessage: postMessage
+    } as const
+}
+export const changeNewTextAC = (newText: string) => {
+    return {
+        type: "CHANGE-NEW-TEXT",
+        newText: newText
+    } as const
+}
 
+export const updateNewMessageBodyAC = (body: string) => {
+    return {
+        type: "UPDATE-NEW-MESSAGE-BODY",
+        body: body
+    } as const
+}
+export const sendNewMessageBodyAC = (body: string) => {
+    return {
+        type: "SEND-MESSAGE",
+        body: body
+    } as const
+}
 
 const store: StoreType = {
     _state: {
@@ -76,7 +100,8 @@ const store: StoreType = {
                 {id: 3, message: 'Yo'},
                 {id: 4, message: 'Yo'},
                 {id: 5, message: 'Yo'}
-            ]
+            ],
+            newMessageBody : ""
         },
         sidebar: {}
     },
@@ -92,6 +117,20 @@ const store: StoreType = {
         }
         this._state.profilePage.posts.push(newPost)
         this._state.profilePage.messageForNewPost = '';
+        this._onChange()
+    },
+
+    updateNewMessageBody (body: string){
+        this._state.dialogsPage.newMessageBody = body
+        this._onChange()
+    },
+    sendNewMessageBody (body: string){
+        const newPost: MessagesType = {
+            id: new Date().getTime(),
+            message: body
+        }
+        this._state.dialogsPage.messages.push(newPost)
+        this._state.dialogsPage.newMessageBody = ''
         this._onChange()
     },
     _onChange() {
@@ -115,6 +154,17 @@ const store: StoreType = {
             this._onChange()
         } else if (action.type === "CHANGE-NEW-TEXT") {
             this._state.profilePage.messageForNewPost = action.newText
+            this._onChange()
+        } else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
+            this._state.dialogsPage.newMessageBody = action.body
+            this._onChange()
+        } else if (action.type === "SEND-MESSAGE") {
+            let body = this._state.dialogsPage.newMessageBody
+            this._state.dialogsPage.newMessageBody = ''
+            this._state.dialogsPage.messages.push({
+                id:new Date().getTime(),
+                message: body
+            })
             this._onChange()
         }
     }

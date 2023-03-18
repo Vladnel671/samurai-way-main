@@ -1,11 +1,10 @@
 import React, {ChangeEvent, FC} from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {ActionsTypes, PostsTypeProps} from "../../../redux/state";
+import {ActionsTypes, addPostAC, PostsTypeProps} from "../../../redux/state";
 
 type Posts = {
     posts: PostsTypeProps[]
-
     messageForNewPost: string
     changePostTextCallback: (newText: string) => void
     dispatch: (action: ActionsTypes) => void
@@ -16,11 +15,12 @@ const MyPosts: React.FC<Posts> = (props): JSX.Element => {
     let postsElements = props.posts.map(p => <Post key={p.id} likesCount={p.likesCount} message={p.message}/>)
 
     let addPost = () => {
-        props.dispatch({type: "ADD-POST", postMessage: props.messageForNewPost})
+       // props.dispatch({type: "ADD-POST", postMessage: props.messageForNewPost})
+        props.dispatch(addPostAC(props.messageForNewPost))
     }
 
     const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.changePostTextCallback(e.currentTarget.value)
+        props.dispatch({type: "CHANGE-NEW-TEXT", newText: e.currentTarget.value})
     }
 
 
