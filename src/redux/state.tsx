@@ -1,3 +1,7 @@
+import profileReducer, {addPostAC, changeNewTextAC} from "./profile-reducer";
+import dialogsReducer, {sendNewMessageBodyAC, updateNewMessageBodyAC} from "./dialogs-reducer";
+import sidebarReducer from "./sidebar-reducer";
+
 export type DialogsType = {
     id: number,
     name: string
@@ -11,7 +15,6 @@ export type PostsTypeProps = {
     message: string,
     likesCount: number
 }
-
 export type newMessageBody = {
     id: number,
     message: string
@@ -30,7 +33,7 @@ export type DialogPageType = {
     messages: Array<MessagesType>
     newMessageBody: string
 }
-type SidebarType = {}
+export type SidebarType = {}
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
@@ -44,37 +47,15 @@ export type StoreType = {
     subscribe: (callback: () => void) => void
     getState: () => RootStateType
     dispatch: (action: ActionsTypes) => void
-    updateNewMessageBody:(body: string) => void
+    updateNewMessageBody: (body: string) => void
     sendNewMessageBody: (body: string) => void
 }
 
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewTextAC> | ReturnType<typeof updateNewMessageBodyAC> | ReturnType<typeof sendNewMessageBodyAC>
-
-export const addPostAC = (postMessage: string) => {
-    return {
-        type: "ADD-POST",
-        postMessage: postMessage
-    } as const
-}
-export const changeNewTextAC = (newText: string) => {
-    return {
-        type: "CHANGE-NEW-TEXT",
-        newText: newText
-    } as const
-}
-
-export const updateNewMessageBodyAC = (body: string) => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-BODY",
-        body: body
-    } as const
-}
-export const sendNewMessageBodyAC = (body: string) => {
-    return {
-        type: "SEND-MESSAGE",
-        body: body
-    } as const
-}
+export type ActionsTypes =
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof changeNewTextAC>
+    | ReturnType<typeof updateNewMessageBodyAC>
+    | ReturnType<typeof sendNewMessageBodyAC>
 
 const store: StoreType = {
     _state: {
@@ -101,7 +82,7 @@ const store: StoreType = {
                 {id: 4, message: 'Yo'},
                 {id: 5, message: 'Yo'}
             ],
-            newMessageBody : ""
+            newMessageBody: ""
         },
         sidebar: {}
     },
@@ -120,11 +101,11 @@ const store: StoreType = {
         this._onChange()
     },
 
-    updateNewMessageBody (body: string){
+    updateNewMessageBody(body: string) {
         this._state.dialogsPage.newMessageBody = body
         this._onChange()
     },
-    sendNewMessageBody (body: string){
+    sendNewMessageBody(body: string) {
         const newPost: MessagesType = {
             id: new Date().getTime(),
             message: body
@@ -143,30 +124,11 @@ const store: StoreType = {
         return this._state
     },
     dispatch(action) {
-        if (action.type === "ADD-POST") {
-            const newPost: PostsTypeProps = {
-                id: new Date().getTime(),
-                message: action.postMessage,
-                likesCount: 14
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.messageForNewPost = '';
-            this._onChange()
-        } else if (action.type === "CHANGE-NEW-TEXT") {
-            this._state.profilePage.messageForNewPost = action.newText
-            this._onChange()
-        } else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
-            this._state.dialogsPage.newMessageBody = action.body
-            this._onChange()
-        } else if (action.type === "SEND-MESSAGE") {
-            let body = this._state.dialogsPage.newMessageBody
-            this._state.dialogsPage.newMessageBody = ''
-            this._state.dialogsPage.messages.push({
-                id:new Date().getTime(),
-                message: body
-            })
-            this._onChange()
-        }
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+        this._onChange()
     }
 }
 
