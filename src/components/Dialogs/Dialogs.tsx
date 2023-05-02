@@ -3,7 +3,7 @@ import s from "./Dialogs.module.css"
 import DialogsItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
 import {ActionsTypes, StoreType} from "../../redux/state";
-import {sendNewMessageBodyAC} from "../../redux/dialogs-reducer";
+import {sendNewMessageBodyAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
 
 type DialogsPropsType = {
     store: StoreType
@@ -22,7 +22,7 @@ const Dialogs: React.FC<DialogsPropsType> = (props): JSX.Element => {
     }
     let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.target.value
-        props.store.dispatch({type: "UPDATE-NEW-MESSAGE-BODY", body: e.currentTarget.value})
+        props.store.dispatch(updateNewMessageBodyAC(body))
     }
 
 
