@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FC} from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {ActionsTypes, PostsTypeProps, ProfilePageType, StoreType} from "../../../redux/state";
+import {ActionsTypes, PostsTypeProps, ProfilePageType, StoreType} from "../../../redux/store";
 import {addPostAC, changeNewTextAC} from "../../../redux/profile-reducer";
 
 type Posts = {
@@ -18,7 +18,6 @@ const MyPosts: React.FC<Posts> = (props): JSX.Element => {
     let postsElements = props.posts.map(p => <Post key={p.id} likesCount={p.likesCount} message={p.message}/>)
 
     let addPost = () => {
-       // props.dispatch({type: "ADD-POST", postMessage: props.messageForNewPost})
         props.dispatch(addPostAC(props.messageForNewPost))
     }
 

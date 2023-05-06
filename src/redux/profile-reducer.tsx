@@ -1,4 +1,4 @@
-import state, {ActionsTypes, PostsTypeProps, ProfilePageType, RootStateType, StoreType} from "./state";
+import state, {ActionsTypes, PostsTypeProps, ProfilePageType, RootStateType, StoreType} from "./store";
 
 const profileReducer = (state: ProfilePageType, action: ActionsTypes) => {
     switch (action.type) {

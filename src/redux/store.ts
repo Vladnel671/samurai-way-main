@@ -86,6 +86,7 @@ const store: StoreType = {
         },
         sidebar: {}
     },
+
     changePostTextCallback(newText: string) {
         this._state.profilePage.messageForNewPost = newText
         this._onChange()
