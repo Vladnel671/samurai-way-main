@@ -13,7 +13,7 @@ const rerenderEntireTree = () => {
     );
 };
 
-store.subscribe(rerenderEntireTree)
 rerenderEntireTree()
+store.subscribe(rerenderEntireTree)
 
 
