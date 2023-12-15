@@ -7,21 +7,33 @@
 }
 
 .postTextArea {
-    max-width: 1000px;
-    max-height: 200px;
-    min-width: 150px;
-    min-height: 160px;
+    width: 500px;
+    height: 30px;
+    resize: none;
     border-radius: 30px;
-    padding: 20px;
+    padding: 8px 0 20px 10px;
     border: none;
     box-sizing: border-box;
+    display: flex;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
-
 .postTextArea:hover {
-    border: none
+    outline: none;
 }
 .postTextArea:active {
-    transition: color 200ms cubic-bezier(0.08, 0.52, 0.52, 1);
     border: none;
     box-sizing: border-box;
+    outline: none;
+}
+.postTextArea:focus {
+    padding:15px;
+    border: none;
+    box-sizing: border-box;
+    height: 150px;
+    outline: none;
+}
+
+.postTextArea::-webkit-scrollbar {
+    display: none;
 }
