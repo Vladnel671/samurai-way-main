@@ -1,34 +1,53 @@
-import {ActionsTypes, DialogPageType, PostsTypeProps, RootStateType} from "./store";
+import {ActionsTypes, MessagesType, DialogPageType} from "../types";
 
-const dialogsReducer = (state: DialogPageType, action: ActionsTypes) => {
+const initialState: DialogPageType = {
+    dialogs: [
+        { id: 1, name: "John" },
+        { id: 2, name: "Jane" },
+        { id: 3, name: "Bob" }
+    ],
+    messages: [
+        { id: 1, message: "Hello!" },
+        { id: 2, message: "How are you?" },
+        { id: 3, message: "Nice to meet you!" }
+    ],
+    newMessageBody: ""
+};
+
+const dialogsReducer = (state: DialogPageType = initialState, action: ActionsTypes): DialogPageType => {
     switch (action.type) {
-        case "UPDATE-NEW-MESSAGE-BODY":
-            state.newMessageBody = action.body
-            return state;
         case "SEND-MESSAGE":
-            let body = state.newMessageBody
-            state.newMessageBody = ''
-            state.messages.push({
+            const newMessage: MessagesType = {
                 id: new Date().getTime(),
-                message: body
-            });
-            return state;
+                message: action.message
+            };
+            return {
+                ...state,
+                messages: [...state.messages, newMessage],
+                newMessageBody: ""
+            };
+        case "UPDATE-NEW-MESSAGE-BODY":
+            return {
+                ...state,
+                newMessageBody: action.body
+            };
         default:
             return state;
     }
-
 };
-export default dialogsReducer
+
+export default dialogsReducer;
+
+export const sendMessageAC = (message: string) => {
+    return {
+        type: "SEND-MESSAGE",
+        message: message
+    } as const;
+};
 
 export const updateNewMessageBodyAC = (body: string) => {
     return {
         type: "UPDATE-NEW-MESSAGE-BODY",
         body: body
-    } as const
-}
-export const sendNewMessageBodyAC = (body: string) => {
-    return {
-        type: "SEND-MESSAGE",
-        body: body
-    } as const
-}
+    } as const;
+};

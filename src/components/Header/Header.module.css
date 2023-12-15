@@ -3,5 +3,6 @@
     background-color: limegreen;
 }
 .header img {
-    width: 20px;
+    width: 60px;
+    border-radius: 30px;
 }

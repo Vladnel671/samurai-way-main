@@ -1,6 +1,27 @@
 .postsBlock {
     padding: 10px;
 }
+
 .posts {
     margin-top: 10px;
+}
+
+.postTextArea {
+    max-width: 1000px;
+    max-height: 200px;
+    min-width: 150px;
+    min-height: 160px;
+    border-radius: 30px;
+    padding: 20px;
+    border: none;
+    box-sizing: border-box;
+}
+
+.postTextArea:hover {
+    border: none
+}
+.postTextArea:active {
+    transition: color 200ms cubic-bezier(0.08, 0.52, 0.52, 1);
+    border: none;
+    box-sizing: border-box;
 }

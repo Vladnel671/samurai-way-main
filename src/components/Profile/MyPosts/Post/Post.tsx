@@ -1,18 +1,19 @@
 import React from "react";
 import s from './Post.module.css'
 
-
 type MyPostsTypeProps = {
     message: string
-    likesCount : number
+    likesCount: number
 }
-const Post : React.FC<MyPostsTypeProps> = (props): JSX.Element => {
+const Post: React.FC<MyPostsTypeProps> = ({message, likesCount}): JSX.Element => {
     return (
         <div className={s.item}>
-            <img src="https://bipbap.ru/wp-content/uploads/2022/11/1652235714_41-kartinkin-net-p-prikolnie-kartinki-dlya-stima-44.jpg" alt=""/>
-            {props.message}
+            <img
+                src="https://masterpiecer-images.s3.yandex.net/487ca75268ea11eeaea6da477c0f1ee2:upscaled"
+                alt=""/>
+            {message}
             <div>
-                <span>Likes</span> <span className={s.likesCount}>{props.likesCount}</span>
+                <span>Likes</span> <span className={s.likesCount}>{likesCount}</span>
             </div>
         </div>
     )

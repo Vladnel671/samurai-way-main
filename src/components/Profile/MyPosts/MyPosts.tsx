@@ -1,40 +1,36 @@
-import React, {ChangeEvent, FC} from "react";
+import React, {ChangeEvent} from "react"
 import s from './MyPosts.module.css'
-import Post from "./Post/Post";
-import {ActionsTypes, PostsTypeProps, ProfilePageType, StoreType} from "../../../redux/store";
-import {addPostAC, changeNewTextAC} from "../../../redux/profile-reducer";
+import Post from "./Post/Post"
+import {PostsTypeProps} from "../../../types"
 
 type Posts = {
-    posts: PostsTypeProps[]
-    addPost: (postMessage: string) => void
-    changePostTextCallback: (newText: string) => void
-    dispatch: (action: ActionsTypes) => void
-    messageForNewPost: string
-    state: StoreType
-}
+    posts: PostsTypeProps[];
+    onAddPost: (postMessage: string) => void;
+    onPostChange: (newText: string) => void;
+    messageForNewPost: string;
+};
 
-const MyPosts: React.FC<Posts> = (props): JSX.Element => {
+const MyPosts: React.FC<Posts> = ({posts, messageForNewPost, onAddPost, onPostChange}): JSX.Element => {
 
-    let postsElements = props.posts.map(p => <Post key={p.id} likesCount={p.likesCount} message={p.message}/>)
+    let postsElements = posts.map(p => <Post key={p.id} likesCount={p.likesCount} message={p.message}/>)
+    const handleAddPost = () => {
+        onAddPost(messageForNewPost);
+    };
 
-    let addPost = () => {
-        props.dispatch(addPostAC(props.messageForNewPost))
+    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        onPostChange(e.target.value)
     }
-
-    const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(changeNewTextAC(e.currentTarget.value))
-    }
-
 
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea placeholder='Enter your message' value={props.messageForNewPost} onChange={newTextChangeHandler}></textarea>
+                    <textarea className={s.postTextArea} placeholder='Enter your message' value={messageForNewPost}
+                              onChange={onChangeHandler}></textarea>
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={handleAddPost}>Add post</button>
                     <button>Remove</button>
                 </div>
             </div>
