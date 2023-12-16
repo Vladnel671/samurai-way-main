@@ -12,7 +12,7 @@ type Posts = {
 
 const MyPosts: React.FC<Posts> = ({posts, messageForNewPost, onAddPost, onPostChange}): JSX.Element => {
 
-    let postsElements = posts.map(p => <Post key={p.id} likesCount={p.likesCount} message={p.message}/>)
+    let postsElements = [...posts].map(p => <Post key={p.id} likesCount={p.likesCount} message={p.message}/>).reverse();
     const handleAddPost = () => {
         onAddPost(messageForNewPost);
     };
@@ -23,7 +23,7 @@ const MyPosts: React.FC<Posts> = ({posts, messageForNewPost, onAddPost, onPostCh
 
     return (
         <div className={s.postsBlock}>
-            <h3>My posts</h3>
+            <h3 style={{color:"white"}}>My posts</h3>
             <div>
                 <div>
                     <textarea className={s.postTextArea} placeholder='Enter your message' value={messageForNewPost}
@@ -33,6 +33,7 @@ const MyPosts: React.FC<Posts> = ({posts, messageForNewPost, onAddPost, onPostCh
                     <button onClick={handleAddPost}>Add post</button>
                     <button>Remove</button>
                 </div>
+                <hr/>
             </div>
             <div className={s.posts}>
                 {postsElements}

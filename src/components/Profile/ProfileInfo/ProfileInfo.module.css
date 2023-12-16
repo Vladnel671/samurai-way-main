@@ -4,9 +4,9 @@
     align-items: start;
     justify-content: end;
     margin-bottom: 50px;
-    background: cadetblue;
     padding-left: 250px;
     border-top: 2px solid black;
+    color: white;
 }
 
 .profileHeaderImg {
@@ -39,6 +39,5 @@
 .descriptionProfile {
     display: flex;
     width: 600px;
-    background-color: rebeccapurple;
-
+    color: white;
 }
