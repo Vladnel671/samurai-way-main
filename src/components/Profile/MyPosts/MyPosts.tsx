@@ -30,8 +30,7 @@ const MyPosts: React.FC<Posts> = ({posts, messageForNewPost, onAddPost, onPostCh
                               onChange={onChangeHandler}></textarea>
                 </div>
                 <div>
-                    <button onClick={handleAddPost}>Add post</button>
-                    <button>Remove</button>
+                    <button onClick={handleAddPost}>Publish</button>
                 </div>
             </div>
             <hr/>
