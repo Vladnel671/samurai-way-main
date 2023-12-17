@@ -14,16 +14,15 @@
 }
 
 .postMessage {
-    padding-left: 10px;
     display: flex;
     word-break: break-all;
 }
 
 .postBlock {
     display: flex;
-    min-height: 200px;
+    min-height: 50px;
     min-width: 200px;
-    max-width: 800px;
+    max-width: 550px;
     flex-direction: column;
     margin: 10px;
     background: #7e7e7e;
@@ -32,6 +31,7 @@
 }
 
 .likesBlock {
+    margin-top: 10px;
     display: flex;
     width: 60px;
     align-items: center;
@@ -45,6 +45,6 @@
 }
 .messageBlock {
     display: flex;
-    min-height: 100px;
+    min-height: 50px;
     border-radius: 10px;
 }

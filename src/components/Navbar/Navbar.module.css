@@ -1,17 +1,22 @@
 .nav {
     grid-area: n;
-    background-color: seagreen;
-    padding: 20px;
+    margin-top: 40px;
 }
 .item a{
+    display: flex;
+    width: 90%;
     color: white;
     text-decoration: none;
     transition: color 200ms cubic-bezier(0.08,0.52,0.52,1);
-    font-size: 18px;
+    font-size: 15px;
+    align-items: center;
+    justify-content: start;
+    height: 40px;
+    border-radius: 4px;
+    padding-left: 10px;
 }
 .item a.active{
-    color: gold;
 }
 .item a:hover {
-    color: gold;
+    background: #7e7e7e;
 }

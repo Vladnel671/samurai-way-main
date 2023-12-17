@@ -23,8 +23,8 @@ const MyPosts: React.FC<Posts> = ({posts, messageForNewPost, onAddPost, onPostCh
 
     return (
         <div className={s.postsBlock}>
-            <h3 style={{color:"white"}}>My posts</h3>
-            <div>
+            <div style={{paddingLeft:'30px'}}>
+                <h3 style={{color: "white"}}>My posts</h3>
                 <div>
                     <textarea className={s.postTextArea} placeholder='Enter your message' value={messageForNewPost}
                               onChange={onChangeHandler}></textarea>
@@ -33,8 +33,8 @@ const MyPosts: React.FC<Posts> = ({posts, messageForNewPost, onAddPost, onPostCh
                     <button onClick={handleAddPost}>Add post</button>
                     <button>Remove</button>
                 </div>
-                <hr/>
             </div>
+            <hr/>
             <div className={s.posts}>
                 {postsElements}
             </div>
