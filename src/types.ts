@@ -42,4 +42,12 @@ export type ActionsTypes =
     | ReturnType<typeof updateNewMessageBodyAC>
     | ReturnType<typeof sendMessageAC>
 
+export type PostsMapDispatchToPropsType = {
+    onAddPost: (postMessage: string) => void;
+    onPostChange: (newText: string) => void;
+};
 
+export type DialogsMapDispatchToPropsType = {
+    updateNewMessageBody: (newText: string) => void;
+    sendNewMessageBody: (body: string) => void;
+};

@@ -2,17 +2,18 @@ import React from 'react'
 import Dialogs from "./Dialogs"
 import {connect} from "react-redux"
 import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer"
-import { Dispatch } from 'redux';
-import {RootStateType} from "../../types";
+import {Dispatch} from 'redux';
+import {DialogPageType, DialogsMapDispatchToPropsType, RootStateType} from "../../types";
 
-let mapStateToProps = (state: RootStateType) => {
-    debugger
+let mapStateToProps = (state: RootStateType): DialogPageType => {
     return {
-        dialogPage: state.dialogsPage
+        dialogs: state.dialogsPage.dialogs,
+        messages: state.dialogsPage.messages,
+        newMessageBody: state.dialogsPage.newMessageBody
     }
 }
 
-let mapDispatchToProps = (dispatch: Dispatch) => {
+let mapDispatchToProps = (dispatch: Dispatch): DialogsMapDispatchToPropsType => {
     return {
         updateNewMessageBody: (newText: string) => {
             dispatch(updateNewMessageBodyAC(newText))

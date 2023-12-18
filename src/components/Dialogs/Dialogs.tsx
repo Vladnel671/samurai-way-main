@@ -2,24 +2,23 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css';
 import DialogsItem from './DialogItem/DialogsItem';
 import Message from './Message/Message';
+import {DialogsType, MessagesType} from "../../types";
 
 type DialogsPropsType = {
-    dialogPage: {
-        dialogs: Array<{ id: number; name: string }>;
-        messages: Array<{ id: number; message: string }>;
-        newMessageBody: string;
-    };
-    updateNewMessageBody: (newText: string) => void;
-    sendNewMessageBody: (body: string) => void;
-};
+    dialogs: DialogsType[],
+    messages: MessagesType[],
+    newMessageBody: string,
+    updateNewMessageBody: (newText: string) => void,
+    sendNewMessageBody: (body: string) => void
+}
 
 const Dialogs: React.FC<DialogsPropsType> = ({
-                                                 dialogPage,
-                                                 updateNewMessageBody,
+                                                 dialogs,
+                                                 messages,
                                                  sendNewMessageBody,
+                                                 newMessageBody,
+                                                 updateNewMessageBody
                                              }) => {
-
-    const {dialogs, messages, newMessageBody} = dialogPage;
 
     let dialogsElements = dialogs.map((d) => (
         <DialogsItem key={d.id} name={d.name} id={d.id}/>
@@ -28,8 +27,7 @@ const Dialogs: React.FC<DialogsPropsType> = ({
         <Message key={m.id} message={m.message}/>
     ));
 
-    let onSendMessageClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
+    let onSendMessageClick = () => {
         sendNewMessageBody(newMessageBody);
     };
     let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {

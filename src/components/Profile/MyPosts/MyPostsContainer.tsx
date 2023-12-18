@@ -1,28 +1,22 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
-import {RootStateType, PostsTypeProps} from '../../../types';
+import {
+    RootStateType,
+    PostsMapDispatchToPropsType,
+    ProfilePageType
+} from '../../../types';
 import {addPostAC, changeNewTextAC} from '../../../redux/profile-reducer';
 import MyPosts from './MyPosts';
 
-type MapStateToPropsType = {
-    posts: PostsTypeProps[];
-    messageForNewPost: string;
-};
-
-type MapDispatchToPropsType = {
-    onAddPost: (postMessage: string) => void;
-    onPostChange: (newText: string) => void;
-};
-
-const mapStateToProps = (state: RootStateType): MapStateToPropsType => {
+const mapStateToProps = (state: RootStateType): ProfilePageType => {
     return {
         posts: state.profilePage.posts,
         messageForNewPost: state.profilePage.messageForNewPost,
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+const mapDispatchToProps = (dispatch: Dispatch): PostsMapDispatchToPropsType => {
     return {
         onAddPost: (postMessage: string) => {
             dispatch(addPostAC(postMessage));

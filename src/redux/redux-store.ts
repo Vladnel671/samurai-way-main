@@ -5,7 +5,7 @@ import sidebarReducer from "./sidebar-reducer";
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
-    dialogPage: dialogsReducer,
+    dialogsPage: dialogsReducer,
     sideBar: sidebarReducer
 })
 
