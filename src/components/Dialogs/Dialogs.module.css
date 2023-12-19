@@ -3,6 +3,7 @@
     background: #c56363;
     border-radius: 30px;
     min-height: 600px;
+    max-width: 1000px;
 }
 
 .dialogsItems {

@@ -20,16 +20,23 @@ const Users: FC<UsersPropsType> = ({users, setUsers, onUnfollow, onFollow}) => {
 
     return (
         <div className={s.UsersBlock}>
-            {users.map(u => <span>
-                <div>
-                    {u.followed ? <button onClick={() => unFollow(u.id)}>Unfollow</button> :
-                        <button onClick={() => follow(u.id)}>Follow</button>}
+            {users.map(u => <div className={s.userInfoBlock} key={u.id}>
+                    <img className={s.userPhoto} src={u.userPhoto} alt="user-photo"/>
+                    <span className={s.fullNameBlock}>
+                         {u.fullName}
+                    </span>
+                    <span>{u.status}</span>
+                    <div className={s.locationBlock}>
+                        <span>{u.location.country}</span>, <span className={s.userCity}>{u.location.city}</span>
+                    </div>
+                    <div>
+                        {u.followed ?
+                            <button className={s.followUnfollowBtn} onClick={() => unFollow(u.id)}>Unfollow</button> :
+                            <button className={s.followUnfollowBtn} onClick={() => follow(u.id)}>Follow</button>
+                        }
+                    </div>
                 </div>
-                <span>
-                {u.fullName}
-                </span>
-
-            </span>)}
+            )}
         </div>
     );
 };
