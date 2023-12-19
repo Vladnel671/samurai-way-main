@@ -14,7 +14,9 @@ const MyPosts: React.FC<Posts> = ({posts, messageForNewPost, onAddPost, onPostCh
 
     let postsElements = [...posts].map(p => <Post key={p.id} likesCount={p.likesCount} message={p.message}/>).reverse();
     const handleAddPost = () => {
-        onAddPost(messageForNewPost);
+        if (messageForNewPost.trim() !== '') {
+            onAddPost(messageForNewPost);
+        }
     };
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -23,7 +25,7 @@ const MyPosts: React.FC<Posts> = ({posts, messageForNewPost, onAddPost, onPostCh
 
     return (
         <div className={s.postsBlock}>
-            <div style={{paddingLeft:'30px'}}>
+            <div style={{paddingLeft: '30px'}}>
                 <h3 style={{color: "white"}}>My posts</h3>
                 <div>
                     <textarea className={s.postTextArea} placeholder='Enter your message' value={messageForNewPost}

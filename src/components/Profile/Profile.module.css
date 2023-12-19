@@ -1,3 +1,7 @@
 .item {
     color:greenyellow;
 }
+.ProfileAndPostsBlock {
+    display: flex;
+    flex-direction: column;
+}

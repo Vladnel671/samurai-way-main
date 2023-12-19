@@ -3,7 +3,7 @@ import s from './Settings.module.css'
 
 const Settings : React.FC = (): JSX.Element => {
     return (
-        <div>
+        <div className={s.settingsBlock}>
             Settings
         </div>
     );

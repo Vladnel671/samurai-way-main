@@ -28,14 +28,17 @@ const Dialogs: React.FC<DialogsPropsType> = ({
     ));
 
     let onSendMessageClick = () => {
-        sendNewMessageBody(newMessageBody);
+        if (newMessageBody.trim() !== '') {
+            sendNewMessageBody(newMessageBody);
+        }
     };
+
     let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         updateNewMessageBody(e.target.value);
     };
 
     return (
-        <div>
+        <div className={s.DialogsBlock}>
             <div className={s.dialogs}>
                 <div className={s.dialogsItems}>{dialogsElements}</div>
                 <div className={s.messages}>
@@ -43,6 +46,7 @@ const Dialogs: React.FC<DialogsPropsType> = ({
                     <div>
                         <div>
                               <textarea
+                                  className={s.textArea}
                                   value={newMessageBody}
                                   onChange={onNewMessageChange}
                                   placeholder="Enter your message"
