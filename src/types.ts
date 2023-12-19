@@ -1,5 +1,6 @@
 import {addPostAC, changeNewTextAC} from "./redux/profile-reducer";
 import {sendMessageAC, updateNewMessageBodyAC} from "./redux/dialogs-reducer";
+import {followAC, setUsersAC, unfollowAC} from "./redux/users-reducer";
 
 export type DialogsType = {
     id: number,
@@ -34,6 +35,7 @@ export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
     sidebar: SidebarType
+    usersPage: UsersPageType
 }
 
 export type ActionsTypes =
@@ -41,6 +43,26 @@ export type ActionsTypes =
     | ReturnType<typeof changeNewTextAC>
     | ReturnType<typeof updateNewMessageBodyAC>
     | ReturnType<typeof sendMessageAC>
+    | ReturnType<typeof followAC>
+    | ReturnType<typeof unfollowAC>
+    | ReturnType<typeof setUsersAC>
+
+type locationType = {
+    city: string,
+    country: string
+}
+
+export type UserType = {
+    id: number,
+    followed: boolean,
+    fullName: string,
+    status: string,
+    location: locationType
+}
+
+export type UsersPageType = {
+    users: UserType[],
+}
 
 export type PostsMapDispatchToPropsType = {
     onAddPost: (postMessage: string) => void;
@@ -51,3 +73,9 @@ export type DialogsMapDispatchToPropsType = {
     updateNewMessageBody: (newText: string) => void;
     sendNewMessageBody: (body: string) => void;
 };
+
+export type UsersMapDispatchType = {
+    onFollow: (userID: number) => void
+    onUnfollow: (userID: number) => void
+    setUsers: (users: UserType[]) => void
+}

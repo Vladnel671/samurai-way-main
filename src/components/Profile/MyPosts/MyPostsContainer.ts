@@ -1,11 +1,6 @@
-import React from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
-import {
-    RootStateType,
-    PostsMapDispatchToPropsType,
-    ProfilePageType
-} from '../../../types';
+import {PostsMapDispatchToPropsType, ProfilePageType, RootStateType} from '../../../types';
 import {addPostAC, changeNewTextAC} from '../../../redux/profile-reducer';
 import MyPosts from './MyPosts';
 
