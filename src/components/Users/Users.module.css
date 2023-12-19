@@ -1,0 +1,5 @@
+.UsersBlock {
+    display: flex;
+    background: aqua;
+    min-height: 600px;
+}
