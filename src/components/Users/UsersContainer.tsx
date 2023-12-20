@@ -12,7 +12,7 @@ import {
 } from "../../redux/users-reducer";
 import axios from "axios";
 import Users from "./Users";
-import s from './Users.module.css'
+import Preloader from "../common/Preloader/Preloader";
 
 type UsersContainerPropsType = {
     users: UserType[]
@@ -57,7 +57,7 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
     }
 
     render() {
-        return this.props.isFetching ? <div className={s.loader}></div> :
+        return this.props.isFetching ? <Preloader/> :
             <Users totalUsersCount={this.props.totalUsersCount}
                    pageSize={this.props.pageSize}
                    currentPage={this.props.currentPage}
