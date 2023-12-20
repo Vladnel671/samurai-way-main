@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
-import Users from "./Users";
+import UsersAPIComponent from "./UsersAPIComponent";
 import {RootStateType, UsersMapDispatchType, UsersPageType, UserType} from "../../types";
 import {followAC, setCurrentPageAC, setTotalUserCountAC, setUsersAC, unfollowAC} from "../../redux/users-reducer";
 
@@ -33,6 +33,6 @@ const mapDispatchToProps = (dispatch: Dispatch): UsersMapDispatchType => {
     };
 };
 
-const UserContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
+const UserContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);
 
 export default UserContainer;
