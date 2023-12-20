@@ -13,6 +13,10 @@
 
 .app-wrapper-content {
     grid-area: c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 600px;
 }
 
 hr {

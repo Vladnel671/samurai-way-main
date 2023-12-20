@@ -5,7 +5,9 @@ const initialState: UsersPageType = {
     pageSize: 9,
     totalUsersCount: 0,
     currentPage: 1,
+    isFetching: false,
 };
+
 
 export const userReducer = (state: UsersPageType = initialState, action: ActionsTypes): UsersPageType => {
     switch (action.type) {
@@ -41,6 +43,11 @@ export const userReducer = (state: UsersPageType = initialState, action: Actions
             return {
                 ...state, totalUsersCount: action.totalCount
             }
+        case 'TOGGLE_IS_FETCHING':
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
         default:
             return state;
     }
@@ -74,5 +81,11 @@ export const setTotalUserCountAC = (totalCount: number) => {
     return {
         type: "SET_TOTAL_COUNT",
         totalCount
+    } as const
+}
+export const setIsFetchingAC = (isFetching: boolean) => {
+    return {
+        type: "TOGGLE_IS_FETCHING",
+        isFetching
     } as const
 }

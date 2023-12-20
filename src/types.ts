@@ -1,6 +1,13 @@
 import {addPostAC, changeNewTextAC} from "./redux/profile-reducer";
 import {sendMessageAC, updateNewMessageBodyAC} from "./redux/dialogs-reducer";
-import {followAC, setCurrentPageAC, setTotalUserCountAC, setUsersAC, unfollowAC} from "./redux/users-reducer";
+import {
+    followAC,
+    setCurrentPageAC,
+    setIsFetchingAC,
+    setTotalUserCountAC,
+    setUsersAC,
+    unfollowAC
+} from "./redux/users-reducer";
 
 export type DialogsType = {
     id: number,
@@ -48,6 +55,7 @@ export type ActionsTypes =
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setTotalUserCountAC>
+    | ReturnType<typeof setIsFetchingAC>
 
 export type PhotosType = {
     large: string | null,
@@ -67,7 +75,8 @@ export type UsersPageType = {
     users: UserType[],
     pageSize: number,
     totalUsersCount: number,
-    currentPage: number
+    currentPage: number,
+    isFetching: boolean
 }
 
 export type PostsMapDispatchToPropsType = {
@@ -86,4 +95,5 @@ export type UsersMapDispatchType = {
     setUsers: (users: UserType[]) => void
     setCurrentPage: (page: number) => void
     setTotalUserCount: (totalCount: number) => void
+    setIsFetching: (isFetching: boolean) => void
 }
