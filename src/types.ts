@@ -84,6 +84,6 @@ export type UsersMapDispatchType = {
     onFollow: (userID: number) => void
     onUnfollow: (userID: number) => void
     setUsers: (users: UserType[]) => void
-    setCurrenPage: (page: number) => void
+    setCurrentPage: (page: number) => void
     setTotalUserCount: (totalCount: number) => void
 }

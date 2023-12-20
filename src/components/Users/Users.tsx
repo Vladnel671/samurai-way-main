@@ -26,7 +26,7 @@ const Users: FC<UsersPropsType> = (props) => {
                     <div className={s.userInfoBlock} key={u.id}>
                         <img src={u.photos.large ? u.photos.large : ''} className={s.userPhoto} alt="user-photo"/>
                         <span className={s.fullNameBlock}>{u.name}</span>
-                        <span>{u.status}</span>
+                        <span className={s.userStatus}>{u.status}</span>
                         <div className={s.locationBlock}>
                             <span>Country</span>, <span className={s.userCity}>City</span>
                         </div>

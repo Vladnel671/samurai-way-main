@@ -92,3 +92,11 @@
     color: #777777;
     padding: 0 5px;
 }
+.userStatus {
+    display: flex;
+    max-width: 290px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+}
