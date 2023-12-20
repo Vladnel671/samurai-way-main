@@ -1,13 +1,6 @@
 import {addPostAC, changeNewTextAC} from "./redux/profile-reducer";
 import {sendMessageAC, updateNewMessageBodyAC} from "./redux/dialogs-reducer";
-import {
-    followAC,
-    setCurrentPageAC,
-    setIsFetchingAC,
-    setTotalUserCountAC,
-    setUsersAC,
-    unfollowAC
-} from "./redux/users-reducer";
+import {follow, setCurrentPage, setIsFetching, setTotalUserCount, setUsers, unfollow} from "./redux/users-reducer";
 
 export type DialogsType = {
     id: number,
@@ -50,12 +43,12 @@ export type ActionsTypes =
     | ReturnType<typeof changeNewTextAC>
     | ReturnType<typeof updateNewMessageBodyAC>
     | ReturnType<typeof sendMessageAC>
-    | ReturnType<typeof followAC>
-    | ReturnType<typeof unfollowAC>
-    | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setTotalUserCountAC>
-    | ReturnType<typeof setIsFetchingAC>
+    | ReturnType<typeof follow>
+    | ReturnType<typeof unfollow>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalUserCount>
+    | ReturnType<typeof setIsFetching>
 
 export type PhotosType = {
     large: string | null,
@@ -88,12 +81,3 @@ export type DialogsMapDispatchToPropsType = {
     updateNewMessageBody: (newText: string) => void;
     sendNewMessageBody: (body: string) => void;
 };
-
-export type UsersMapDispatchType = {
-    onFollow: (userID: number) => void
-    onUnfollow: (userID: number) => void
-    setUsers: (users: UserType[]) => void
-    setCurrentPage: (page: number) => void
-    setTotalUserCount: (totalCount: number) => void
-    setIsFetching: (isFetching: boolean) => void
-}
