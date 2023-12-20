@@ -1,6 +1,6 @@
 import {addPostAC, changeNewTextAC} from "./redux/profile-reducer";
 import {sendMessageAC, updateNewMessageBodyAC} from "./redux/dialogs-reducer";
-import {followAC, setUsersAC, unfollowAC} from "./redux/users-reducer";
+import {followAC, setCurrentPageAC, setTotalUserCountAC, setUsersAC, unfollowAC} from "./redux/users-reducer";
 
 export type DialogsType = {
     id: number,
@@ -46,6 +46,8 @@ export type ActionsTypes =
     | ReturnType<typeof followAC>
     | ReturnType<typeof unfollowAC>
     | ReturnType<typeof setUsersAC>
+    | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setTotalUserCountAC>
 
 export type PhotosType = {
     large: string | null,
@@ -63,6 +65,9 @@ export type UserType = {
 
 export type UsersPageType = {
     users: UserType[],
+    pageSize: number,
+    totalUsersCount: number,
+    currentPage: number
 }
 
 export type PostsMapDispatchToPropsType = {
@@ -79,4 +84,6 @@ export type UsersMapDispatchType = {
     onFollow: (userID: number) => void
     onUnfollow: (userID: number) => void
     setUsers: (users: UserType[]) => void
+    setCurrenPage: (page: number) => void
+    setTotalUserCount: (totalCount: number) => void
 }
