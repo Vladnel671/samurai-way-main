@@ -1,6 +1,7 @@
-import React, {FC} from 'react';
+import axios from "axios";
+import React from "react";
+import s from "./Users.module.css";
 import {UserType} from "../../types";
-import s from "./Users.module.css"
 
 type UsersPropsType = {
     users: UserType[]
@@ -9,36 +10,59 @@ type UsersPropsType = {
     setUsers: (users: UserType[]) => void
 }
 
-const Users: FC<UsersPropsType> = ({users, setUsers, onUnfollow, onFollow}) => {
-
-    const unFollow = (userID: number) => {
-        onUnfollow(userID)
+class Users extends React.Component<UsersPropsType> {
+    constructor(props: UsersPropsType) {
+        super(props);
+        this.state = {
+            users: []
+        };
     }
-    const follow = (userID: number) => {
-        onFollow(userID)
+
+    componentDidMount() {
+        axios.get("https://social-network.samuraijs.com/api/1.0/users")
+            .then(response => {
+                this.props.setUsers(response.data.items);
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
-    return (
-        <div className={s.UsersBlock}>
-            {users.map(u => <div className={s.userInfoBlock} key={u.id}>
-                    <img className={s.userPhoto} src={u.userPhoto} alt="user-photo"/>
-                    <span className={s.fullNameBlock}>
-                         {u.fullName}
-                    </span>
-                    <span>{u.status}</span>
-                    <div className={s.locationBlock}>
-                        <span>{u.location.country}</span>, <span className={s.userCity}>{u.location.city}</span>
+    unFollow(userId: number) {
+        this.props.onUnfollow(userId);
+    }
+
+    follow(userId: number) {
+        this.props.onUnfollow(userId);
+    }
+
+    render() {
+        return (
+            <div className={s.UsersBlock}>
+                {this.props.users.map(u => (
+                    <div className={s.userInfoBlock} key={u.id}>
+                        <img className={s.userPhoto} alt="user-photo"/>
+                        <span className={s.fullNameBlock}>{u.name}</span>
+                        <span>{u.status}</span>
+                        <div className={s.locationBlock}>
+                            <span>Country</span>, <span className={s.userCity}>City</span>
+                        </div>
+                        <div>
+                            {u.followed ? (
+                                <button className={s.followUnfollowBtn} onClick={() => this.unFollow(u.id)}>
+                                    Unfollow
+                                </button>
+                            ) : (
+                                <button className={s.followUnfollowBtn} onClick={() => this.follow(u.id)}>
+                                    Follow
+                                </button>
+                            )}
+                        </div>
                     </div>
-                    <div>
-                        {u.followed ?
-                            <button className={s.followUnfollowBtn} onClick={() => unFollow(u.id)}>Unfollow</button> :
-                            <button className={s.followUnfollowBtn} onClick={() => follow(u.id)}>Follow</button>
-                        }
-                    </div>
-                </div>
-            )}
-        </div>
-    );
-};
+                ))}
+            </div>
+        );
+    }
+}
 
 export default Users;
