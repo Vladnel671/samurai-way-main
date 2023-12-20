@@ -49,17 +49,16 @@ class Users extends React.Component<UsersPropsType> {
                         </div>
                         <div>
                             {u.followed ? (
-                                <button className={s.followUnfollowBtn} onClick={() => this.unFollow(u.id)}>
+                                <button className={s.followUnfollowBtn} onClick={() => this.props.onUnfollow(u.id)}>
                                     Unfollow
                                 </button>
                             ) : (
-                                <button className={s.followUnfollowBtn} onClick={() => this.follow(u.id)}>
+                                <button className={s.followUnfollowBtn} onClick={() => this.props.onFollow(u.id)}>
                                     Follow
                                 </button>
                             )}
                         </div>
-                    </div>
-                ))}
+                    </div>))}
             </div>
         );
     }

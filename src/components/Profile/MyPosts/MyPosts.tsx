@@ -27,11 +27,9 @@ const MyPosts: React.FC<Posts> = ({posts, messageForNewPost, onAddPost, onPostCh
         <div className={s.postsBlock}>
             <div style={{paddingLeft: '30px'}}>
                 <h3 style={{color: "white"}}>My posts</h3>
-                <div>
+                <div className={s.TextAreaAndButtonBlock}>
                     <textarea className={s.postTextArea} placeholder='Enter your message' value={messageForNewPost}
                               onChange={onChangeHandler}></textarea>
-                </div>
-                <div>
                     <button onClick={handleAddPost}>Publish</button>
                 </div>
             </div>

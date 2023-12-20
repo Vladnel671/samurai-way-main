@@ -32,3 +32,8 @@
 .postTextArea::-webkit-scrollbar {
     display: none;
 }
+
+.TextAreaAndButtonBlock {
+    display: flex;
+    flex-direction: row;
+}

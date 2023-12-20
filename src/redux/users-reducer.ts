@@ -28,7 +28,7 @@ export const userReducer = (state: UsersPageType = initialState, action: Actions
             }
         case 'SET_USERS':
             return {
-                ...state, users: [...state.users, ...action.users]
+                ...state, users: action.users
             }
         default:
             return state;
