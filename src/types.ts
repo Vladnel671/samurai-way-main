@@ -1,4 +1,4 @@
-import {addPostAC, changeNewTextAC} from "./redux/profile-reducer";
+import {addPostAC, changeNewTextAC, setUserProfile} from "./redux/profile-reducer";
 import {sendMessageAC, updateNewMessageBodyAC} from "./redux/dialogs-reducer";
 import {follow, setCurrentPage, setIsFetching, setTotalUserCount, setUsers, unfollow} from "./redux/users-reducer";
 
@@ -19,6 +19,35 @@ export type PostsTypeProps = {
 }
 
 export type ProfilePageType = {
+    messageForNewPost: string
+    posts: Array<PostsTypeProps>
+    profile: UserInfo
+}
+
+export type UserInfo = {
+    userId: number | null;
+    fullName: string | null;
+    aboutMe: string | null;
+    contacts: {
+        facebook: string | null;
+        website: string | null;
+        vk: string | null;
+        twitter: string | null;
+        instagram: string | null;
+        youtube: string | null;
+        github: string | null;
+        mainLink: string | null;
+    };
+    lookingForAJob: boolean | null;
+    lookingForAJobDescription: string | null;
+    photos: {
+        small: string | null;
+        large: string | null;
+    };
+};
+
+
+export type PostsType = {
     messageForNewPost: string
     posts: Array<PostsTypeProps>
 }
@@ -49,6 +78,7 @@ export type ActionsTypes =
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUserCount>
     | ReturnType<typeof setIsFetching>
+    | ReturnType<typeof setUserProfile>
 
 export type PhotosType = {
     large: string | null,

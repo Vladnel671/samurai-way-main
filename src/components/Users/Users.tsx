@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import s from "./Users.module.css";
 import {UserType} from "../../types";
+import {NavLink} from "react-router-dom";
 
 type UsersPropsType = {
     users: UserType[]
@@ -24,7 +25,9 @@ const Users: FC<UsersPropsType> = (props) => {
             <div className={s.UsersBlock}>
                 {props.users.map(u => (
                     <div className={s.userInfoBlock} key={u.id}>
-                        <img src={u.photos.large ? u.photos.large : ''} className={s.userPhoto} alt="user-photo"/>
+                        <NavLink className={s.userPhoto} to={'/profile/' + u.id}>
+                            {u.photos.large && <img src={u.photos.large} alt="user-photo"/>}
+                        </NavLink>
                         <span className={s.fullNameBlock}>{u.name}</span>
                         <span className={s.userStatus}>{u.status}</span>
                         <div className={s.locationBlock}>

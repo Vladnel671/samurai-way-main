@@ -1,11 +1,32 @@
-import {ActionsTypes, PostsTypeProps, ProfilePageType} from "../types";
+import {ActionsTypes, PostsTypeProps, ProfilePageType, UserInfo} from "../types";
 
 const initialState: ProfilePageType = {
     messageForNewPost: "",
     posts: [
         {id: 1, message: "It's my first post", likesCount: 12},
         {id: 2, message: "Hi, how are you?", likesCount: 54}
-    ]
+    ],
+    profile: {
+        aboutMe: null,
+        contacts: {
+            facebook: null,
+            website: null,
+            vk: null,
+            twitter: null,
+            instagram: null,
+            youtube: null,
+            github: null,
+            mainLink: null
+        },
+        lookingForAJob: null,
+        lookingForAJobDescription: null,
+        fullName: null,
+        userId: null,
+        photos: {
+            small: null,
+            large: null
+        }
+    }
 };
 
 const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
@@ -26,6 +47,11 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
                 ...state,
                 messageForNewPost: action.newText
             };
+        case "SET_USER_PROFILE":
+            return {
+                ...state,
+                profile: action.profile
+            };
         default:
             return state;
     }
@@ -36,13 +62,20 @@ export default profileReducer;
 export const addPostAC = (postMessage: string) => {
     return {
         type: "ADD-POST",
-        postMessage: postMessage
+        postMessage
     } as const;
 };
 
 export const changeNewTextAC = (newText: string) => {
     return {
         type: "CHANGE-NEW-TEXT",
-        newText: newText
+        newText
     } as const;
 };
+
+export const setUserProfile = (profile: UserInfo) => {
+    return {
+        type: "SET_USER_PROFILE",
+        profile
+    } as const
+}

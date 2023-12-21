@@ -1,10 +1,10 @@
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
-import {PostsMapDispatchToPropsType, ProfilePageType, RootStateType} from '../../../types';
+import {PostsMapDispatchToPropsType, PostsType, RootStateType} from '../../../types';
 import {addPostAC, changeNewTextAC} from '../../../redux/profile-reducer';
 import MyPosts from './MyPosts';
 
-const mapStateToProps = (state: RootStateType): ProfilePageType => {
+const mapStateToProps = (state: RootStateType): PostsType => {
     return {
         posts: state.profilePage.posts,
         messageForNewPost: state.profilePage.messageForNewPost,
