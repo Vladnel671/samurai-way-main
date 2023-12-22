@@ -8,16 +8,16 @@ type DialogsPropsType = {
     dialogs: DialogsType[],
     messages: MessagesType[],
     newMessageBody: string,
-    updateNewMessageBody: (newText: string) => void,
-    sendNewMessageBody: (body: string) => void
+    updateNewMessage: (newText: string) => void,
+    sendMessage: (body: string) => void
 }
 
 const Dialogs: React.FC<DialogsPropsType> = ({
                                                  dialogs,
                                                  messages,
-                                                 sendNewMessageBody,
+                                                 sendMessage,
                                                  newMessageBody,
-                                                 updateNewMessageBody
+                                                 updateNewMessage
                                              }) => {
 
     let dialogsElements = dialogs.map((d) => (
@@ -29,12 +29,12 @@ const Dialogs: React.FC<DialogsPropsType> = ({
 
     let onSendMessageClick = () => {
         if (newMessageBody.trim() !== '') {
-            sendNewMessageBody(newMessageBody);
+            sendMessage(newMessageBody);
         }
     };
 
     let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        updateNewMessageBody(e.target.value);
+        updateNewMessage(e.target.value);
     };
 
     return (

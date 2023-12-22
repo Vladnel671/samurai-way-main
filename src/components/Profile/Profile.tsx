@@ -10,7 +10,7 @@ const Profile: React.FC<ProfilePropsType> = ({profile}): JSX.Element => {
     if (!profile) {
         return <Preloader/>
     }
-    console.log(profile);
+
     return (
         <div className={s.ProfileAndPostsBlock}>
             <ProfileInfo profile={profile}/>

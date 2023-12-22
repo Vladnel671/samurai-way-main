@@ -5,22 +5,22 @@ import {PostsTypeProps} from "../../../types"
 
 type Posts = {
     posts: PostsTypeProps[];
-    onAddPost: (postMessage: string) => void;
-    onPostChange: (newText: string) => void;
+    addPost: (postMessage: string) => void;
+    changeNewText: (newText: string) => void;
     messageForNewPost: string;
 };
 
-const MyPosts: React.FC<Posts> = ({posts, messageForNewPost, onAddPost, onPostChange}): JSX.Element => {
+const MyPosts: React.FC<Posts> = ({posts, messageForNewPost, addPost, changeNewText}): JSX.Element => {
 
     let postsElements = [...posts].map(p => <Post key={p.id} likesCount={p.likesCount} message={p.message}/>).reverse();
     const handleAddPost = () => {
         if (messageForNewPost.trim() !== '') {
-            onAddPost(messageForNewPost);
+            addPost(messageForNewPost);
         }
     };
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        onPostChange(e.target.value)
+        changeNewText(e.target.value)
     }
 
     return (

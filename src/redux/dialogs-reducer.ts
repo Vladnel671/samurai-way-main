@@ -38,14 +38,14 @@ const dialogsReducer = (state: DialogPageType = initialState, action: ActionsTyp
 
 export default dialogsReducer;
 
-export const sendMessageAC = (message: string) => {
+export const sendMessage = (message: string) => {
     return {
         type: "SEND-MESSAGE",
         message: message
     } as const;
 };
 
-export const updateNewMessageBodyAC = (body: string) => {
+export const updateNewMessage = (body: string) => {
     return {
         type: "UPDATE-NEW-MESSAGE-BODY",
         body: body

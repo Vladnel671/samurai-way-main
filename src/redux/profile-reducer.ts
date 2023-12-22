@@ -59,14 +59,14 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
 
 export default profileReducer;
 
-export const addPostAC = (postMessage: string) => {
+export const addPost = (postMessage: string) => {
     return {
         type: "ADD-POST",
         postMessage
     } as const;
 };
 
-export const changeNewTextAC = (newText: string) => {
+export const changeNewText = (newText: string) => {
     return {
         type: "CHANGE-NEW-TEXT",
         newText

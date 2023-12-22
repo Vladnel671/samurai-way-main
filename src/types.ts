@@ -1,6 +1,7 @@
-import {addPostAC, changeNewTextAC, setUserProfile} from "./redux/profile-reducer";
-import {sendMessageAC, updateNewMessageBodyAC} from "./redux/dialogs-reducer";
+import {addPost, changeNewText, setUserProfile} from "./redux/profile-reducer";
+import {sendMessage, updateNewMessage} from "./redux/dialogs-reducer";
 import {follow, setCurrentPage, setIsFetching, setTotalUserCount, setUsers, unfollow} from "./redux/users-reducer";
+import {setAuthUserData} from "./redux/auth-reducer";
 
 export type DialogsType = {
     id: number,
@@ -65,13 +66,14 @@ export type RootStateType = {
     dialogsPage: DialogPageType
     sidebar: SidebarType
     usersPage: UsersPageType
+    auth: AuthStateType
 }
 
 export type ActionsTypes =
-    ReturnType<typeof addPostAC>
-    | ReturnType<typeof changeNewTextAC>
-    | ReturnType<typeof updateNewMessageBodyAC>
-    | ReturnType<typeof sendMessageAC>
+    ReturnType<typeof addPost>
+    | ReturnType<typeof changeNewText>
+    | ReturnType<typeof updateNewMessage>
+    | ReturnType<typeof sendMessage>
     | ReturnType<typeof follow>
     | ReturnType<typeof unfollow>
     | ReturnType<typeof setUsers>
@@ -101,13 +103,11 @@ export type UsersPageType = {
     currentPage: number,
     isFetching: boolean
 }
-
-export type PostsMapDispatchToPropsType = {
-    onAddPost: (postMessage: string) => void;
-    onPostChange: (newText: string) => void;
-};
-
-export type DialogsMapDispatchToPropsType = {
-    updateNewMessageBody: (newText: string) => void;
-    sendNewMessageBody: (body: string) => void;
-};
+export type AuthStateType = {
+    userID: number | null,
+    email: string | null,
+    login: string | null,
+    isAuth: boolean
+}
+export type AuthActionsType =
+    ReturnType<typeof setAuthUserData>
