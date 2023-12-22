@@ -1,10 +1,8 @@
 import React, {FC} from "react";
 import s from './ProfileInfo.module.css'
 import {UserInfo} from "../../../types";
-
 type ProfileInfoPropsType = { profile: UserInfo }
 const ProfileInfo: FC<ProfileInfoPropsType> = ({profile}) => {
-
     return (
         <div className={s.profileBlock}>
             <div className={s.HeaderBlock}>
@@ -17,7 +15,7 @@ const ProfileInfo: FC<ProfileInfoPropsType> = ({profile}) => {
                 alt="profile-img" className={s.profileMainImg} src={profile.photos.large}/>}
             <div className={s.descriptionBlock}>
                 <h3>{profile.fullName}</h3>
-                <span className={s.descriptionProfile}>{profile.lookingForAJobDescription}</span>
+                <span className={s.descriptionProfile}>{profile.aboutMe}</span>
             </div>
         </div>
 
