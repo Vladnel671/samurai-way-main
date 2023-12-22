@@ -20,13 +20,24 @@ const Users: FC<UsersPropsType> = (props) => {
         pages.push(i)
     }
 
+    let visiblePages = []
+    if (props.currentPage > 3) {
+        visiblePages.push(1, '...')
+    }
+    for (let i = Math.max(2, props.currentPage - 3); i <= Math.min(pagesCount - 1, props.currentPage + 3); i++) {
+        visiblePages.push(i)
+    }
+    if (props.currentPage < pagesCount - 2) {
+        visiblePages.push('...', pagesCount)
+    }
+
     return (
         <div>
             <div className={s.UsersBlock}>
                 {props.users.map(u => (
                     <div className={s.userInfoBlock} key={u.id}>
                         <NavLink className={s.userPhoto} to={'/profile/' + u.id}>
-                            {u.photos.large && <img src={u.photos.large} alt="user-photo"/>}
+                            {u.photos.small && <img src={u.photos.small} alt="user-photo"/>}
                         </NavLink>
                         <span className={s.fullNameBlock}>{u.name}</span>
                         <span className={s.userStatus}>{u.status}</span>
@@ -48,13 +59,17 @@ const Users: FC<UsersPropsType> = (props) => {
                 ))}
             </div>
             <div className={s.pagination}>
-                {pages.map((p, index) => {
-                    return <span
-                        key={index}
-                        onClick={() => {
-                            props.onPageChanged(p)
-                        }}
-                        className={props.currentPage === p ? s.selectedPage : s.page}>{p}</span>
+                {visiblePages.map((p, index) => {
+                    return typeof p === 'number' ? (
+                        <span
+                            key={index}
+                            onClick={() => {
+                                props.onPageChanged(p)
+                            }}
+                            className={props.currentPage === p ? s.selectedPage : s.page}>{p}</span>
+                    ) : (
+                        <span key={index} style={{color: "white"}}>{p}</span>
+                    )
                 })}
             </div>
         </div>
